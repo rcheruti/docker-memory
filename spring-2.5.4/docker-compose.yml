@@ -1,0 +1,109 @@
+# To execute this docker-compose yml file use `docker-compose -f docker-compose.yml up`
+# Add the `-d` flag at the end for detached execution
+# To stop the execution, hit Ctrl+C, and then `docker-compose -f docker-compose.yml down`
+version: "2.2"
+
+networks:
+  teste_default:
+    driver: bridge
+
+services:
+
+# ---------------------------------------------------
+
+  teste-mysql:
+    image: mysql:latest
+    mem_limit: 512m
+    cpus: 1
+    shm_size: 1gb
+    volumes:
+      - ~/database/docker-memory:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpass
+      - MYSQL_DATABASE=teste-memoria
+      - MYSQL_USER=teste-memoria
+      - MYSQL_PASSWORD=teste-memoria
+    ports:
+      - "3306:3306"
+    networks:
+      - teste_default
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # teste-jdk16alpine-spring-2.2.4:
+  #   image: teste-jdk16alpine-spring-2.2.4:0.0.1
+  #   mem_limit: 512m
+  #   mem_reservation: 32M
+  #   cpus: 1
+  #   shm_size: 1gb
+  #   depends_on:
+  #     - teste-mysql
+  #   env_file:
+  #     - docker-env.env
+  #   environment: []
+  #   ports:
+  #     - "8081:8080"
+  #     - "7091:7090"
+  #   networks:
+  #     - teste_default
+  #   extra_hosts:
+  #     - "host.docker.internal:host-gateway"
+
+  # teste-jdk16alpine-spring-2.5.4:
+  #   image: teste-jdk16alpine-spring-2.5.4:0.0.1
+  #   mem_limit: 512m
+  #   mem_reservation: 32M
+  #   cpus: 0.5
+  #   shm_size: 1gb
+  #   depends_on:
+  #     - teste-mysql
+  #   env_file:
+  #     - docker-env.env
+  #   environment: []
+  #   ports:
+  #     - "8080:8080"
+  #     - "7090:7090"
+  #   networks:
+  #     - teste_default
+  #   extra_hosts:
+  #     - "host.docker.internal:host-gateway"
+
+  # teste-jdk16slim-spring-2.5.4:
+  #   image: teste-jdk16slim-spring-2.5.4:0.0.1
+  #   mem_limit: 512m
+  #   mem_reservation: 32M
+  #   cpus: 0.5
+  #   shm_size: 1gb
+  #   depends_on:
+  #     - teste-mysql
+  #   env_file:
+  #     - docker-env.env
+  #   environment: []
+  #   ports:
+  #     - "8082:8080"
+  #     - "7092:7090"
+  #   networks:
+  #     - teste_default
+  #   extra_hosts:
+  #     - "host.docker.internal:host-gateway"
+
+  # teste-jdk11-ubi8-redhat-spring-2.5.4:
+  #   image: teste-jdk11-ubi8-redhat-spring-2.5.4:0.0.1
+  #   mem_limit: 512m
+  #   mem_reservation: 32M
+  #   cpus: 0.5
+  #   shm_size: 1gb
+  #   depends_on:
+  #     - teste-mysql
+  #   env_file:
+  #     - docker-env.env
+  #   environment: []
+  #   ports:
+  #     - "8083:8080"
+  #     - "7093:7090"
+  #   networks:
+  #     - teste_default
+  #   extra_hosts:
+  #     - "host.docker.internal:host-gateway"
+
+
