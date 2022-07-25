@@ -1,4 +1,4 @@
-const winston = require('winston');
+import winston from 'winston';
 
 const loggerFormat = winston.format.combine(
   winston.format.timestamp(),
@@ -8,13 +8,10 @@ const loggerFormat = winston.format.combine(
   }),
 );
 
-const log = winston.createLogger({
+export const log = winston.createLogger({
   level: 'info',
   format: loggerFormat,
   transports: [
     new winston.transports.Console(),
   ]
 });
-
-
-module.exports = log;

@@ -1,18 +1,18 @@
-const log = require('./logger');
+import { log } from './logger';
 log.info('Criando configuração para DB (Sequelize)');
 
-const { Sequelize, Model, DataTypes } = require('sequelize');
+import { Sequelize, Model, DataTypes } from 'sequelize';
 
 const dialect = process.env['database_dialect'] || 'mysql';
 const url = process.env['database_url'];
-const port = process.env['database_port'];
+const port = parseInt( process.env['database_port'] );
 const username = process.env['database_username'];
 const password = process.env['database_password'];
 const schema = process.env['database_schema'];
 
-const sequelize = new Sequelize(schema,username,password, 
+export const db = new Sequelize(schema,username,password, 
   { 
-    dialect:dialect, 
+    dialect: dialect as 'mysql'|'postgres'|'sqlite'|'mariadb'|'mssql', 
     host:url,
     port:port,
     define: {
@@ -20,5 +20,3 @@ const sequelize = new Sequelize(schema,username,password,
     }
   }
 );
-
-module.exports = sequelize;

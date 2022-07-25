@@ -1,9 +1,9 @@
-const { DataTypes } = require('sequelize');
-const db = require('../../config/db');
+import { DataTypes } from 'sequelize';
+import { db } from '../../config/db';
 
-const Pessoa = require('./pessoa');
+import { Pessoa } from './pessoa';
 
-const Carro = db.define('Carro', {
+export const Carro = db.define('Carro', {
   id: {
     primaryKey: true,
     type: DataTypes.INTEGER,
@@ -30,8 +30,6 @@ const Carro = db.define('Carro', {
   tableName: 'carro',
   timestamps: false,
 });
-Carro.beforeAssociate = (models, others) => {
-  console.log('Carro.beforeAssociate', models, others);
-};
-
-module.exports = Carro;
+// Carro.beforeAssociate = (models, others) => {
+//   console.log('Carro.beforeAssociate', models, others);
+// };

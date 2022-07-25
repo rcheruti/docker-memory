@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
-const db = require('../../config/db');
+import { DataTypes } from 'sequelize';
+import { db } from '../../config/db';
 
-const Pessoa = db.define('Pessoa', {
+export const Pessoa = db.define('Pessoa', {
   id: {
     primaryKey: true,
     type: DataTypes.INTEGER,
@@ -14,5 +14,3 @@ const Pessoa = db.define('Pessoa', {
   tableName: 'pessoa',
   timestamps: false
 });
-
-module.exports = Pessoa;

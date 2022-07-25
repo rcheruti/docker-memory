@@ -1,9 +1,10 @@
-const log = require('../config/logger');
-const { kafka } = require('../config/kafka');
-const process = require('process');
+import { log } from '../config/logger';
+import { kafka } from '../config/kafka';
+import process from 'process';
+
 const topico = process.env['kafka_topic'];
 
-async function iniciar() {
+export async function iniciar() {
 
   const consumer = kafka.consumer({ groupId:'grupo1' });
   await consumer.connect();
@@ -23,5 +24,3 @@ async function iniciar() {
   producer.send({ topic: topico, messages:[ { value:'Olá Mundo!' } ] });
   producer.disconnect();
 }
-(async () => await iniciar())();
-

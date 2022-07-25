@@ -1,8 +1,8 @@
-const log = require('./logger');
+import { log } from './logger';
 log.info('Criando associações entre entidades');
 
-const Pessoa = require('../entidades/db/pessoa');
-const Carro = require('../entidades/db/carro');
+import { Pessoa } from '../entidades/db/pessoa';
+import { Carro } from '../entidades/db/carro';
 
 Pessoa.hasMany(Carro, {
   foreignKey: 'pessoa_id'

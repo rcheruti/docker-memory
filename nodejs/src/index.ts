@@ -1,21 +1,23 @@
 
-const log = require('./config/logger');
-const version = require('../package.json').version;
+import { log } from './config/logger';
+import { version } from '../package.json';
 log.info(`Versão: ${version}`);
 
 // iniciar env
-require('dotenv').config()
+import { config } from 'dotenv';
+config()
 
 // iniciar DB
-require('./config/db');
-require('./config/db-associacoes');
+import * as db from './config/db';
+import * as db_associacoes from './config/db-associacoes';
 
 // iniciar Mensageria
-require('./config/kafka');
-require('./ouvintes/my-ouvinte');
+import * as kafka from './config/kafka';
+import { iniciar } from './ouvintes/my-ouvinte';
+(async () => await iniciar())();
 
 // iniciar servidor
-const express = require('express');
+import express from 'express';
 const app = express();
 const port = process.env['server.port'] || 8080;
 
