@@ -38,7 +38,7 @@ public class CarroBorda {
       .setNome( dados.get("nome").asText() )
       .setCor( dados.get("cor").asText() )
       .setAno( dados.get("ano").asInt() )
-      .setDono( dados.has("pessoa") ? pessoaRepo.getOne( dados.path("pessoa").asInt() ) : null )
+      .setDono( dados.has("pessoa") ? pessoaRepo.getById( dados.path("pessoa").asInt() ) : null )
     ;
     carroRepo.save(carro);
     if( carro.getDono() != null ) carro.getDono().setCarros(null);

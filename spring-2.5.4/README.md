@@ -1,19 +1,30 @@
-# Spring 2.5.4
+# Tests with Java Spring
 
-Containers para os testes:
+Commands to start and stop container:
+```
+docker-compose -f docker-compose.yml up -d
+
+docker-compose down
+```
+
+---------------------------
+
+Containers for tests:
 - FROM openjdk:16-alpine
 - FROM openjdk:16-slim
-- FROM registry.access.redhat.com/ubi8/openjdk-11:1.10-1
 
-Spring para testes:
+Spring for tests:
+- 2.7.2
 - 2.5.4
 - 2.2.4.RELEASE
 
 
+---------------------------
+### Old data
 
-Antes JMX: 200m
-Depois JMX: 240m (+40m)
+Before JMX: 200m
+After JMX: 240m (+40m)
 - Metaspace: 60m
 - CodeCache: 20m
 - Min.Heap: 30m
-- = Soma: 110m
+- = Sum: 110m
