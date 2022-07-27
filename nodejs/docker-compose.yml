@@ -4,104 +4,28 @@
 version: "2.2"
 
 networks:
-  teste_default:
+  memory_test_default:
     driver: bridge
 
 services:
 
 # ---------------------------------------------------
 
-  teste-mysql:
-    image: mysql:latest
-    mem_limit: 512m
-    cpus: 0.5
+  memory-test-node16alpine:
+    image: memory-test-node16alpine:0.0.1
+    container_name: memory-test-node16alpine
+    mem_limit: 128m
+    mem_reservation: 16M
+    cpus: 1
     shm_size: 1gb
-    volumes:
-      - ~/database/docker-memory:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=rootpass
-      - MYSQL_DATABASE=teste-memoria
-      - MYSQL_USER=teste-memoria
-      - MYSQL_PASSWORD=teste-memoria
+    # depends_on:
+    #   - teste-mysql
+    env_file:
+      - docker-env.env
+    environment: []
     ports:
-      - "3306:3306"
+      - "9090:8080"
     networks:
-      - teste_default
+      - memory_test_default
     extra_hosts:
       - "host.docker.internal:host-gateway"
-
-  teste-zookeeper:
-    image: confluentinc/cp-zookeeper:6.2.0
-    mem_limit: 256m
-    cpus: 0.5
-    shm_size: 1gb
-    volumes: []
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - "22181:2181"
-    networks:
-      - teste_default
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-
-      # kafka-topics --create --zookeeper teste-zookeeper:2181 --replication-factor 1 --partitions 10 --topic topico1
-
-  teste-kafka:
-    image: confluentinc/cp-kafka:6.2.0
-    mem_limit: 512m
-    cpus: 0.5
-    shm_size: 1gb
-    volumes: []
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: teste-zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://teste-kafka:9092,PLAINTEXT_HOST://localhost:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-    depends_on:
-      - teste-zookeeper
-    ports:
-      - 29092:29092
-    networks:
-      - teste_default
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-
-  # teste-rabbitmq:
-  #   image: rabbitmq:3.9.5-alpine
-  #   mem_limit: 512m
-  #   cpus: 0.5
-  #   shm_size: 1gb
-  #   volumes:
-  #     - ~/database/rabbitmq:/config/rabbitmq
-  #   environment: 
-  #     - RABBITMQ_CONFIG_FILE=/config/rabbitmq/rabbitmq.conf
-  #     - RABBITMQ_ENABLED_PLUGINS_FILE=/config/rabbitmq/rabbitmq-plugins.conf
-  #   ports:
-  #     - "5672:5672"
-  #     - "15672:15672"
-  #   networks:
-  #     - teste_default
-  #   extra_hosts:
-  #     - "host.docker.internal:host-gateway"
-
-  # teste-node16alpine:
-  #   image: teste-node16alpine:0.0.1
-  #   mem_limit: 128m
-  #   mem_reservation: 16M
-  #   cpus: 0.5
-  #   shm_size: 1gb
-  #   depends_on:
-  #     - teste-mysql
-  #   env_file:
-  #     - docker-env.env
-  #   environment: []
-  #   ports:
-  #     - "8080:8080"
-  #   networks:
-  #     - teste_default
-  #   extra_hosts:
-  #     - "host.docker.internal:host-gateway"

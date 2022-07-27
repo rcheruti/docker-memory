@@ -11,8 +11,8 @@ require('./config/db');
 require('./config/db-associacoes');
 
 // iniciar Mensageria
-require('./config/kafka');
-require('./ouvintes/my-ouvinte');
+// require('./config/kafka');
+// require('./ouvintes/my-ouvinte');
 
 // iniciar servidor
 const express = require('express');
