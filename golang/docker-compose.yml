@@ -4,25 +4,26 @@
 version: "2.2"
 
 networks:
-  teste_default:
+  memory_test_default:
     driver: bridge
 
 services:
 
 # ---------------------------------------------------
 
-  teste-go17alpine:
-    image: teste-go17alpine:0.0.1
+  memory-test-go17alpine:
+    image: memory-test-go17alpine:0.0.1
+    container_name: memory-test-go17alpine
     mem_limit: 32m
     mem_reservation: 16M
-    cpus: 0.5
+    cpus: 1
     shm_size: 1gb
     env_file:
       - docker-env.env
     environment: []
     ports:
-      - "8080:8080"
+      - "9090:8080"
     networks:
-      - teste_default
+      - memory_test_default
     extra_hosts:
       - "host.docker.internal:host-gateway"
