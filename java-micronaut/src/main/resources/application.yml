@@ -1,0 +1,16 @@
+micronaut:
+  application:
+    name: docker-memory-java-micronaut
+datasources:
+  default:
+    url: ${DATASOURCE_URL:jdbc:mysql://localhost:3306/docker-memory}
+    driverClassName: ${DATASOURCE_DRIVER_CLASS:com.mysql.cj.jdbc.Driver}
+    username: ${DATASOURCE_USERNAME:docker-memory}
+    password: ${DATASOURCE_PASSWORD:docker-memory}
+    # schema-generate: CREATE_DROP
+    dialect: ${DATASOURCE_DIALECT:MYSQL}
+# jpa.default.properties.hibernate.hbm2ddl.auto: update
+netty:
+  default:
+    allocator:
+      max-order: 3

@@ -1,0 +1,31 @@
+# To execute this docker-compose yml file use `docker-compose -f docker-compose.yml up`
+# Add the `-d` flag at the end for detached execution
+# To stop the execution, hit Ctrl+C, and then `docker-compose -f docker-compose.yml down`
+version: "2.2"
+
+networks:
+  memory_test_default:
+    driver: bridge
+
+services:
+
+# ---------------------------------------------------
+
+  memory-test-jdk16alpine-micronaut:
+    image: memory-test-jdk16alpine-micronaut:0.0.1
+    container_name: memory-test-jdk16alpine-micronaut
+    mem_limit: 256m
+    mem_reservation: 32M
+    cpus: 1
+    shm_size: 1gb
+    # depends_on:
+    #   - memory-test-mysql
+    env_file:
+      - docker-env.env
+    environment: []
+    ports:
+      - "9090:8080"
+    networks:
+      - memory_test_default
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

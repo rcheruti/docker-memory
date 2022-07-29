@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "f609839b-0224-489d-a1b9-684fa776de3b",
+		"name": "Docker Memory Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PESSOA | Save",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Eu\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/pessoa",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pessoa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PESSOA | Todos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/pessoa/todos?size=20&page=0",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pessoa",
+						"todos"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "20"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CARRO | Save",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Meu carro\",\r\n    \"cor\": \"vermelho\",\r\n    \"ano\": 2022,\r\n    \"pessoa\": 6\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/carro",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"carro"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CARRO | Todos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/carro/todos?size=20&page=0",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"carro",
+						"todos"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "20"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:9090",
+			"type": "default"
+		}
+	]
+}
